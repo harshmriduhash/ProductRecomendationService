@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "cf746ee0-45ee-4d7b-acc1-817eaa542b06",
+		"name": "Code Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38051927"
+	},
+	"item": [
+		{
+			"name": "Lambda AWS",
+			"item": [
+				{
+					"name": "SaveProducts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"products\": [\n    {\n      \"id\": \"1\",\n      \"name\": \"Product 1\",\n      \"description\": \"Description for Product 1\",\n      \"tags\": [\"tag1\", \"tag2\"]\n    },\n    {\n      \"id\": \"2\",\n      \"name\": \"Product 2\",\n      \"description\": \"Description for Product 2\",\n      \"tags\": [\"tag3\", \"tag4\"]\n    },\n    {\n      \"id\": \"3\",\n      \"name\": \"Product 3\",\n      \"description\": \"Description for Product 3\",\n      \"tags\": [\"tag5\", \"tag6\"]\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lambdaUrl}}product",
+							"host": [
+								"{{lambdaUrl}}product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HealthCheck AWS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{lambdaUrl}}hello",
+							"host": [
+								"{{lambdaUrl}}hello"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products Score",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{lambdaUrl}}product/1",
+							"host": [
+								"{{lambdaUrl}}product"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "SaveProducts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"products\": [\n    {\n      \"id\": \"1\",\n      \"name\": \"Product 1\",\n      \"description\": \"Description for Product 1\",\n      \"tags\": [\"tag1\", \"tag2\"]\n    },\n    {\n      \"id\": \"2\",\n      \"name\": \"Product 2\",\n      \"description\": \"Description for Product 2\",\n      \"tags\": [\"tag3\", \"tag4\"]\n    },\n    {\n      \"id\": \"3\",\n      \"name\": \"Product 3\",\n      \"description\": \"Description for Product 3\",\n      \"tags\": [\"tag5\", \"tag6\"]\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}product",
+							"host": [
+								"{{apiUrl}}product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HealthCheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}hello",
+							"host": [
+								"{{apiUrl}}hello"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products Score",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}product/1",
+							"host": [
+								"{{apiUrl}}product"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apiUrl",
+			"value": "http://localhost:3000/",
+			"type": "string"
+		},
+		{
+			"key": "lambdaUrl",
+			"value": "https://30eflgmzk7.execute-api.us-east-1.amazonaws.com/dev/",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,52 @@
+services:
+    app:
+        container_name: app
+        image: app-dev
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: dev
+        # Mount host directory to docker container to support watch mode
+        volumes:
+            - .:/app
+            # This ensures that the NestJS container manages the node_modules folder
+            # rather than synchronizes it with the host machine
+            - /app/node_modules
+        env_file:
+            - .env
+        environment:
+            - DB_HOST=host.docker.internal
+        networks:
+            - app-network
+        ports:
+            - 3000:3000
+        depends_on:
+            - database
+        command: npm run start:dev
+
+    database:
+        container_name: app_postgres_dev
+        image: postgres:16.4-alpine
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=POSTGRES_USER
+            - POSTGRES_PASSWORD=POSTGRES_PASSWORD
+            - POSTGRES_DB=POSTGRES_DB
+
+        networks:
+            - app-network
+        ports:
+            - 5432:5432
+        healthcheck:
+            test: [ "CMD-SHELL", "pg_isready -U POSTGRES_USER -d notifications" ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+networks:
+    app-network:
+
+volumes:
+    postgres-data:
